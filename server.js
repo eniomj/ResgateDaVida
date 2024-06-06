@@ -7,7 +7,6 @@ const app = express();
 
 const url = process.env.MONGODB_URI;
 const dbName = 'endangered_animals';
-console.log('MongoDB URI:', process.env.MONGODB_URI);
 
 const client = new MongoClient(url);
 
