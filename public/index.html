@@ -41,7 +41,7 @@
     
     <script>
         function fetchCards(category) {
-            fetch(`https://atvext2-9v0at6vf6-eniomjs-projects.vercel.app/cards?category=${category}`)
+            fetch(`atvext2.vercel.app/cards?category=${category}`)
                 .then(response => response.text())
                 .then(data => {
                     document.getElementById('card-container').innerHTML = data;
