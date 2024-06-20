@@ -14,13 +14,22 @@ let db;
 
 app.use(express.static(path.join(__dirname, 'public')));
 
+/*
+function truncateText(text, maxLength) {
+  if (text.length > maxLength) {
+      return text.substring(0, maxLength) + '...';
+  }
+  return text;
+}
+*/
+
 async function connectToDatabase() {
   try {
     await client.connect();
     console.log('Connected successfully to MongoDB');
     db = client.db(dbName);
 
-    // Start the server
+    // Inicia o servidor
     const PORT = process.env.PORT || 3000;
     app.listen(PORT, () => {
       console.log(`Server started on port ${PORT}`);
@@ -41,17 +50,55 @@ app.get('/cards', async (req, res) => {
     const cards = await collection.find().toArray();
 
     const cardHTML = cards.map(card => `
-      <div class="card">
-        <div class="card-picture"> 
+      <div class="card" onclick="showModal(this)">
+        <div class="modal-body-top">
+          <div class="card-picture"> 
           <img src="${card.imagem}" alt="${card.nome}">
         </div>
-        
+
+        <table class="modal-taxonomy-table">
+          <tr>
+              <th>Taxonomia</th>
+              <th>Classificação</th>
+          </tr>
+          <tr>
+              <td>Espécie</td>
+              <td>${card.nome_cientifico}</td>
+          </tr>
+          <tr>
+              <td>Reino</td>
+              <td>${card.kingdom}</td>
+          </tr>
+          <tr>
+              <td>Filo</td>
+              <td>${card.phylum}</td>
+          </tr>
+          <tr>
+              <td>Classe</td>
+              <td>${card.class}</td>
+          </tr>
+          <tr>
+              <td>Ordem</td>
+              <td>${card.order}</td>
+          </tr>
+          <tr>
+              <td>Família</td>
+              <td>${card.family}</td>
+          </tr>
+          <tr>
+              <td>Gênero</td>
+              <td>${card.genus}</td>
+          </tr>
+        </table>
+        </div>
         <div class="card-title">
           <h4>${card.nome}</h4>
         </div>
+
         <div class="card-description">
-          <p class="card-description">${card.descricao}</p>
+          <p class="card-description-text">${card.descricao}</p>
         </div>
+        <p class="modal-conservation">Status de conservação: ${card.conservation_status}</p>
       </div>
     `).join('');
 
@@ -61,3 +108,4 @@ app.get('/cards', async (req, res) => {
     res.status(500).send('Server Error');
   }
 });
+

@@ -10,45 +10,109 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Space+Mono:ital,wght@0,400;0,700;1,400;1,700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&family=Noto+Sans:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
 </head>
 <body>
     <div class="container">
+        <div class="hamburger" onclick="toggleSidebar()">&#9776;</div>
         <div id="sidebar">
             <div id="nav-header">
                 <img id="header-img" src="logo.png">
                 <h3>Resgate da Vida: Espécies em Perigo</h3>
                 <ul>
                     <li><a href="">HOME</a></li>
-                    <span>·</span>
-                    <li><a href="">SOBRE</a></li>
+
                 </ul>
             </div>
             <div id="nav-menu">
                 <ul>
+                    <li><a href="#" onclick="fetchCards('anfibios')">Anfíbios</a></li>
                     <li><a href="#" onclick="fetchCards('artropodes')">Artropodes</a></li>
                     <li><a href="#" onclick="fetchCards('aves')">Aves</a></li>
                     <li><a href="#" onclick="fetchCards('mamiferos')">Mamiferos</a></li>
                     <li><a href="#" onclick="fetchCards('peixes')">Peixes</a></li>
-                    <li><a href="#" onclick="fetchCards('plantas')">Plantas</a></li>
                     <li><a href="#" onclick="fetchCards('repteis')">Repteis</a></li>
                 </ul>
             </div>
+
+            <span id="sidebar-footer">Enio Antônio Marcante Junior - RU:3673816</span>
         </div>
         <div id="content">
             <div id="card-container"></div>
+            <div id="modal" class="modal">
+                <div class="modal-content">
+                    <span class="close" onclick="closeModal()">&times;</span>
+                    <div class="modal-body"></div>
+                </div>
+            </div>
+            <div id="home">
+                <h2>Resgate da Vida: Espécies em Perigo</h2>
+                <div id="home-container">
+                    <div class="home-block">
+                        <h4>Bem Vindo!</h4>
+                        <p>Nosso planeta abriga uma biodiversidade incrível, com milhões de espécies que vivem em diversos habitats. Infelizmente, muitas dessas espécies estão ameaçadas de extinção devido a atividades humanas e mudanças ambientais. Este site foi criado para aumentar a conscientização sobre a situação de aproximadamente 100 espécies ameaçadas de anfíbios, artrópodes, aves, mamíferos, peixes e repteis.</p>
+                        <p>Ao explorar este site, você aprenderá mais sobre essas espécies, suas características únicas, e os desafios que enfrentam. Meu objetivo é não apenas informar, mas também inspirar ações que possam ajudar a preservar essa rica biodiversidade para as futuras gerações.</p>
+                    </div>
+                    <div class="home-block">
+                        <h4>Considere fazer uma doação!</h4>
+                        <p>Considere fazer uma doação para ONGs confiáveis e comprometidas com a conservação da biodiversidade. Juntos, podemos fazer a diferença e ajudar a preservar a incrível variedade de vida que compartilha este planeta conosco.</p>
+                        <ul id="home-list">
+                            <li><a href="https://www.sosma.org.br/doacao" target="_blank">SOS Mata Atlântica</a></li>
+                            <li><a href="https://doe.conservacao.org.br" target="_blank">Conservação Internacional Brasil</a></li>
+                            <li><a href="https://doe.wwf.org.br/ficha/restaurar" target="_blank">WWF Brasil</a></li>
+                            <li><a href="https://ipe.colabore.org/agua_e_florestas/single_step" target="_blank">Instituto de Pesquisas Ecológicas</a></li>
+                            <li><a href="https://doe.greenpeace.org.br/doar" target="_blank">Greenpeace Brasil</a></li>
+                            <li><a href="https://apoie.socioambiental.org" target="_blank">ISA - Instituto Socioambiental</a></li>
+                        </ul>
+                    </div>
+                    <div class="home-text">
+                        <h4>Perda de habitat</h4>
+                        <p>A perda de habitat é uma das maiores ameaças à biodiversidade global, resultante principalmente das atividades humanas. Desmatamento, expansão urbana e agrícola, mineração e construção de infraestruturas fragmentam e destroem ecossistemas naturais. Essas ações não apenas eliminam áreas vitais para inúmeras espécies, mas também interrompem os processos ecológicos essenciais. Mudanças climáticas e poluição agravam a situação, tornando muitos habitats inabitáveis. Além disso, espécies invasoras e o uso insustentável de recursos naturais contribuem para a degradação ambiental.</p>
+                        <p>Para combater a perda de habitat, é crucial adotar práticas sustentáveis, proteger áreas naturais e restaurar ecossistemas degradados, garantindo a sobrevivência da vida selvagem e a saúde do planeta. A conscientização pública e a ação coletiva são essenciais para proteger os habitats naturais e garantir um futuro sustentável para a vida selvagem e para a humanidade.</p>
+                    </div> 
+                    <div class="home-block">
+                        <h4>Caça ilegal e poluição</h4>
+                        <p>A caça ilegal e a poluição são grandes ameaças à biodiversidade. A caça ilegal, motivada pelo comércio de animais silvestres, coloca espécies como elefantes e tigres em risco de extinção, desequilibrando ecossistemas.</p>
+                        <p>A poluição, por sua vez, contamina solo, água e ar com produtos químicos, resíduos industriais e plásticos, prejudicando plantas e animais. A poluição dos oceanos tem impactos devastadores na vida marinha.</p>
+                        <p>Combater a caça ilegal e a poluição é essencial para preservar a biodiversidade e manter o equilíbrio dos ecossistemas.</p>
+                    </div>
+                    <div class="home-block">
+                        <h4>Educação e Recursos</h4>
+                        <ul id="home-list">
+                            <li><a href="https://sites.google.com/site/medioquestoesambientais" target="_blank">Medio - Questões Ambientais</a></li>
+                            <li><a href="https://in.gov.br/en/web/dou/-/portaria-mma-n-148-de-7-de-junho-de-2022-406272733" target="_blank">ICMBio - Lista de Espécies Endêmicas</a></li>
+                            <li><a href="https://sites.google.com/site/medioquestoesambientais" target="_blank">Medio - Questões Ambientais</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
-    
+
+    <script src="script.js"></script>
     <script>
         function fetchCards(category) {
-            fetch(`atvext2.vercel.app/cards?category=${category}`)
+            const menuItems = document.querySelectorAll('#nav-menu ul li');
+            menuItems.forEach(item => {
+                item.classList.remove('active');
+            });
+
+            event.target.parentElement.classList.add('active');
+
+            fetch(`https://atvext2-1d7ba806ca46.herokuapp.com/cards?category=${category}`)
                 .then(response => response.text())
                 .then(data => {
+                    document.getElementById('home').style.visibility = 'hidden';
                     document.getElementById('card-container').innerHTML = data;
                 })
                 .catch(error => {
                     console.error('Error:', error);
                 });
+        }
+
+        function toggleSidebar() {
+            const sidebar = document.getElementById('sidebar');
+            sidebar.classList.toggle('active');
         }
     </script>
 </body>
