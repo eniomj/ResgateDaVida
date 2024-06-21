@@ -308,6 +308,8 @@ body {
     overflow: auto;
     background-color: rgba(0, 0, 0, 0.5);
     padding-top: 60px;
+    justify-content: center;
+    align-items: center;
 }
 
 .modal .modal-img {
@@ -480,6 +482,11 @@ body {
         margin-right: 0;
     }
 
+    #nav-menu ul li.active {
+        list-style-type: none;
+        border-bottom: 1px solid lightgreen ;
+    }
+
     #nav-menu ul li a {
         font-size: 10px;
         margin: 0;
@@ -503,15 +510,16 @@ body {
         display: flex;
         flex-direction: column;
         height: auto;
-        overflow: auto;
+        max-height: calc(100vh - 40px);
+        overflow-y: auto;
+        width: 90%;
+        padding: 20px;
+        box-sizing: border-box;
     }
 
     .modal-body-top {
         flex-direction: column;
         flex-wrap: wrap;
-    }
-
-    .modal-body-top {
         justify-content: center;
     }
 

@@ -15,16 +15,19 @@ function showModal(card) {
 
     const images = modalBody.querySelectorAll('img');
     images.forEach(img => img.classList.add('modal-img'));
+    closeSidebar();
 }
 
 function closeModal() {
     const modal = document.getElementById("modal");
     modal.style.display = "none";
+    closeSidebar();
 }
 
 window.onclick = function(event) {
     const modal = document.getElementById("modal");
     if (event.target == modal) {
         modal.style.display = "none";
+        closeSidebar();
     }
 }
