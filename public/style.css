@@ -6,7 +6,7 @@ html, body {
     margin: 0;
     padding: 0;
     height: 100%;
-    min-width: 320px; /* Updated min-width for better mobile compatibility */
+    min-width: 320px;
     font-weight: 300;
     font-family: "Noto Sans", sans-serif;
     font-optical-sizing: auto;
@@ -274,10 +274,10 @@ body {
     display: block;
     color: lightskyblue;
     font-size: 14px;
-    line-height: 1.8em;
+    line-height: 2em;
     text-decoration: none;
     transition: all 0.3s ease;
-    text-transform: uppercase;
+    
     letter-spacing: 0.2em;
     font-weight: bold;
 }
@@ -371,6 +371,11 @@ body {
         justify-content: center;
     }
 
+    .home-text {
+        width: 400px;
+        height: auto;
+    }
+
     .home-block {
         min-width: 200px;
         height: auto;
@@ -416,7 +421,7 @@ body {
         flex-direction: column;
         align-items: center;
         justify-content: flex-start;
-        overflow: hidden;
+ 
     }
 
     #sidebar.active {
