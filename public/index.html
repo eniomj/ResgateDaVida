@@ -102,7 +102,7 @@
 
             event.target.parentElement.classList.add('active');
 
-            fetch(`https://atvext2.onrender.com/cards?category=${category}`)
+            fetch(`https://resgatedavida.tech/cards?category=${category}`)
                 .then(response => response.text())
                 .then(data => {
                     document.getElementById('home').style.visibility = 'hidden';
