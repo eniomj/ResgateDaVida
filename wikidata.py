@@ -4,12 +4,12 @@ import requests
 from pymongo.mongo_client import MongoClient
 from pymongo.server_api import ServerApi
 
-
 load_dotenv()
 uri = os.environ.get("MONGODB_URI")
 client = MongoClient(uri, server_api=ServerApi('1'))
 db = client["endangered_animals"]
-collection = db["artropodes"]
+
+collections = ["anfibios", "artropodes", "aves", "mamiferos", "peixes", "plantas", "repteis"]
 
 def get_wikidata_id(scientific_name):
     url = f"https://www.wikidata.org/w/api.php"
@@ -129,26 +129,33 @@ def get_conservation_status_label(status_id):
             return entity['labels']['pt']['value']
     return None
 
-for animal in collection.find():
-    scientific_name = animal["nome_cientifico"]
-    common_name = animal.get("nome") 
-    
-    print(f"Processing {scientific_name}...")
-    
-    wikidata_id = get_wikidata_id(scientific_name)
-    
-    if not wikidata_id and common_name:
-        print(f"Trying common name {common_name}...")
-        wikidata_id = get_wikidata_id(common_name)
-    
-    if wikidata_id:
-        info = get_taxon_hierarchy(wikidata_id)
-        print(f"Extracted taxonomy for {scientific_name} ({common_name}): {info}")
+for collection_name in collections:
+    collection = db[collection_name]
+    for animal in collection.find():
+        scientific_name = animal["nome_cientifico"]
+        common_name = animal.get("nome")
         
-        if info:
-            collection.update_one({"_id": animal["_id"]}, {"$set": info})
-            print(f"Updated {scientific_name} ({common_name}) with Wikidata info")
-    else:
-        print(f"No info found for {scientific_name} ({common_name})")
+        existing_fields = ["kingdom", "phylum", "class", "order", "family", "genus", "species", "conservation_status"]
+        if all(animal.get(field) for field in existing_fields):
+            print(f"Skipping {common_name}")
+            continue
+
+        print(f"Processing {scientific_name} in collection {collection_name}...")
+        
+        wikidata_id = get_wikidata_id(scientific_name)
+        
+        if not wikidata_id and common_name:
+            print(f"Trying common name {common_name}...")
+            wikidata_id = get_wikidata_id(common_name)
+        
+        if wikidata_id:
+            info = get_taxon_hierarchy(wikidata_id)
+            print(f"Extracted taxonomy for {scientific_name} ({common_name}): {info}")
+            
+            if info:
+                collection.update_one({"_id": animal["_id"]}, {"$set": info})
+                print(f"Updated {scientific_name} ({common_name}) with Wikidata info")
+        else:
+            print(f"No info found for {scientific_name} ({common_name})")
 
 client.close()

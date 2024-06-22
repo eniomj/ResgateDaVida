@@ -63,6 +63,7 @@
                             <li><a href="https://ipe.colabore.org/agua_e_florestas/single_step" target="_blank">Instituto de Pesquisas Ecológicas</a></li>
                             <li><a href="https://doe.greenpeace.org.br/doar" target="_blank">Greenpeace Brasil</a></li>
                             <li><a href="https://apoie.socioambiental.org" target="_blank">ISA - Instituto Socioambiental</a></li>
+                            <li><a href="https://www.iucnredlist.org/support/donate" target="_blank">IUCN -  Lista Vermelha</a></li>
                         </ul>
                     </div>
                     <div class="home-text">
@@ -84,6 +85,7 @@
                             <li><a href="https://www.ipcc.ch/" target="_blank">IPCC</a></li>
                             <li><a href="https://www.wwf.org.br/" target="_blank">WWF Brasil - Conservação da Natureza</a></li>
                             <li><a href="https://www.tamar.org.br/" target="_blank">Projeto Tamar</a></li>
+                            <li><a href="https://www.iucnredlist.org/" target="_blank">IUCN -  Lista Vermelha</a></li>
                         </ul>
                     </div>
                 </div>
@@ -100,7 +102,7 @@
             });
 
             event.target.parentElement.classList.add('active');
-
+            // http://localhost:3000/cards?category=${category}
             fetch(`https://resgatedavida.tech/cards?category=${category}`)
                 .then(response => response.text())
                 .then(data => {
