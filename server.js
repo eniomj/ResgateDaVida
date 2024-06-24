@@ -35,6 +35,26 @@ async function connectToDatabase() {
 
 connectToDatabase();
 
+app.use(async (req, res, next) => {
+  try {
+    const visitorLog = {
+      timestamp: new Date(),
+      method: req.method,
+      url: req.url,
+      ipHash: crypto.createHash('sha256').update(req.ip).digest('hex')
+    };
+    
+    const logsCollection = db.collection('visitor_logs');
+    await logsCollection.insertOne(visitorLog);
+
+    console.log(`${JSON.stringify(visitorLog)}`);
+  } catch (err) {
+    console.error('Error', err);
+  }
+
+  next();
+});
+
 app.get('/image/:fileId', async (req, res) => {
   try {
     const fileId = new ObjectId(req.params.fileId);
