@@ -103,7 +103,7 @@
 
             event.target.parentElement.classList.add('active');
             //  http://localhost:3000/cards?category=${category}
-            fetch(`https://resgatedavida.tech/cards?category=${category}`)
+            fetch(`https://resgatedavida.live/cards?category=${category}`)
                 .then(response => response.text())
                 .then(data => {
                     document.getElementById('home').style.visibility = 'hidden';
