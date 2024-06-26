@@ -4,6 +4,7 @@ const { MongoClient, ObjectId } = require('mongodb');
 const path = require('path');
 const GridFSBucket = require('mongodb').GridFSBucket;
 const crypto = require('crypto');
+const cors = require('cors');
 
 const app = express();
 
@@ -15,6 +16,7 @@ const client = new MongoClient(url);
 let db, bucket;
 
 app.use(express.static(path.join(__dirname, 'public')));
+app.use(cors());
 
 async function connectToDatabase() {
   try {
